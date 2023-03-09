@@ -1,0 +1,13 @@
+// Unit 4, Assignment 1
+
+public class PopulationStudy {
+
+    public static void main (String[] argv)
+    {
+	DrawTool.display ();
+	DrawTool.setXYRange (0,10, 0,10);
+
+     
+    }
+    
+}
