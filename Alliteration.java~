@@ -1,0 +1,24 @@
+
+import java.util.*;
+
+public class Alliteration {
+
+    public static void main (String[] argv)
+    {
+	LinkedList<String> longest = findLongestAlliteration ("testtext.txt");
+	System.out.println ("Longest alliteration in " + filename + ": " + longest);
+    }
+
+    static LinkedList<String> findLongestAlliteration (String filename)
+    {
+	IOTool.openFileByWord (filename);
+
+	String w = IOTool.getNextWord ();
+	while (w != null) {
+	    w = IOTool.getNextWord ();
+	}
+
+	return longest;
+    }
+
+}
