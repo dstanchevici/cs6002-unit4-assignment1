@@ -47,11 +47,10 @@ public class Alliteration {
 	} // end-of-while
 
 	if ( currentAllit.size() > longestAllit.size() ) {
-	    longestAllit.clear ();
-	    longestAllit = deepCopyList (currentAllit);
-	    currentAllit.clear ();	
+	    return currentAllit;
 	}
-	return longestAllit;	
+	return longestAllit;
+	
     } // end-findLongestAlliteration()
 
     
