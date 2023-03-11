@@ -19,19 +19,15 @@ public class Alliteration {
 	LinkedList<String> currentAllit = new LinkedList<> ();
 	
 	IOTool.openFileByWord (filename);
-	String w = IOTool.getNextWord();
-	currentAllit.add (w.toLowerCase());
+	String w = IOTool.getNextWord().toLowerCase();
 	char currentChar = w.charAt (0);
 		
 	while (w != null) {
-	    w = IOTool.getNextWord ();
-	    
-	    // Even w/ while (w != null), the last w is always null
-	    // So I'm adding this second checker.
-	    if (w != null && w.charAt(0) == currentChar) {
+
+	    if ( w.charAt(0) == currentChar) {
 		currentAllit.add (w.toLowerCase());
 	    }
-	    else if (w != null && w.charAt(0) != currentChar) {
+	    else {
 		if ( currentAllit.size() > longestAllit.size() ) {
 		    longestAllit.clear ();
 		    longestAllit = deepCopyList (currentAllit);
@@ -41,18 +37,20 @@ public class Alliteration {
 		currentAllit.add (w.toLowerCase());
 		currentChar = w.charAt (0);
 	    }
-	    else if ( (w == null) && ( currentAllit.size() > longestAllit.size() )  ) {
-		longestAllit.clear ();
-		longestAllit = deepCopyList (currentAllit);
-		currentAllit.clear ();	
-	    }
 	    // Debugging
 	    //System.out.println ("-----------------------");
 	    //System.out.println ("Current: " + currentAllit);
 	    //System.out.println ("Longest: " + longestAllit);
+
+	    w = IOTool.getNextWord ();
 	
 	} // end-of-while
-	
+
+	if ( currentAllit.size() > longestAllit.size() ) {
+	    longestAllit.clear ();
+	    longestAllit = deepCopyList (currentAllit);
+	    currentAllit.clear ();	
+	}
 	return longestAllit;	
     } // end-findLongestAlliteration()
 
