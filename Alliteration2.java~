@@ -15,8 +15,8 @@ public class Alliteration {
 
     static LinkedList<String> findLongestAlliteration (String filename)
     {
+	LinkedList<String> longestAllit = new LinkedList<> ();
 	LinkedList<String> currentAllit = new LinkedList<> ();
-	LinkedList<String> longestAllit = currentAllit;
 	
 	IOTool.openFileByWord (filename);
 	String w = IOTool.getNextWord().toLowerCase();
@@ -29,10 +29,11 @@ public class Alliteration {
 	    }
 	    else {
 		if ( currentAllit.size() > longestAllit.size() ) {
-		    longestAllit = currentAllit;
-		    currentAllit = new LinkedList<> ();
+		    longestAllit.clear ();
+		    longestAllit = deepCopyList (currentAllit);
+		    currentAllit.clear ();
 		}
-		currentAllit = new LinkedList<> ();
+		currentAllit.clear ();
 		currentAllit.add (w.toLowerCase());
 		currentChar = w.charAt (0);
 	    }
@@ -52,4 +53,13 @@ public class Alliteration {
 	
     } // end-findLongestAlliteration()
 
+    
+    static LinkedList<String> deepCopyList (LinkedList<String> source)
+    {
+	LinkedList<String> target = new LinkedList<> ();
+	for (String s: source) {
+	    target.add (s);
+	}
+	return target;
+    }
 }
