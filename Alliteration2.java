@@ -5,10 +5,10 @@ public class Alliteration2 {
 
     public static void main (String[] argv)
     {
-	String filename = "testtext.txt";
+	//String filename = "testtext.txt";
 	//String filename = "testtext2.txt";
 	//String filename = "alice.txt";
-	//String filename = "sherlockholmes.txt";
+	String filename = "sherlockholmes.txt";
 	DoublyLinkedAllit longest = findLongestAlliteration (filename);
 	System.out.println ("Longest alliteration in " + filename + ": ");
 	longest.printList();
@@ -16,8 +16,8 @@ public class Alliteration2 {
 
     static DoublyLinkedAllit findLongestAlliteration (String filename)
     {
-	DoublyLinkedAllit longestAllit = new DoublyLinkedAllit ();
 	DoublyLinkedAllit currentAllit = new DoublyLinkedAllit ();
+	DoublyLinkedAllit longestAllit = currentAllit;
 	
 	IOTool.openFileByWord (filename);
 	String w = IOTool.getNextWord().toLowerCase();
@@ -30,18 +30,21 @@ public class Alliteration2 {
 	    }
 	    else {
 		if ( currentAllit.size() > longestAllit.size() ) {
-		    longestAllit.clearList ();
-		    longestAllit = currentAllit.deepCopyList ();
-		    currentAllit.clearList ();
+		    longestAllit = currentAllit;
+		    currentAllit = new DoublyLinkedAllit ();
 		}
-		currentAllit.clearList ();
+		currentAllit = new DoublyLinkedAllit ();
 		currentAllit.addToList (w.toLowerCase());
 		currentChar = w.charAt (0);
 	    }
 	    // Debugging
-	    //System.out.println ("-----------------------");
-	    //System.out.println ("Current: " + currentAllit.printList());
-	    //System.out.println ("Longest: " + longestAllit.printList());
+	    /*
+	    System.out.println ("-----------------------");
+	    System.out.println ("Current size=" + currentAllit.size());
+	    currentAllit.printList();
+	    System.out.println ("Longest size=" + longestAllit.size());
+	    longestAllit.printList();
+	    */
 
 	    w = IOTool.getNextWord ();
 	
@@ -53,15 +56,4 @@ public class Alliteration2 {
 	return longestAllit;
 	
     } // end-findLongestAlliteration()
-
-    /*    
-    static DoublyLinkedAllit deepCopyList (DoublyLinkedAllit source)
-    {
-	DoublyLinkedAllit target = new DoublyLinkedAllit ();
-	for (String s: source) {
-	    target.addToList (s);
-	}
-	return target;
-    }
-    */
 }

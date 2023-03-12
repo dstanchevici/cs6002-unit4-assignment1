@@ -27,11 +27,6 @@ public class DoublyLinkedAllit {
 	}
     }
 
-    public void clearList ()
-    {
-	front = rear = null;
-    }
-
     public int size ()
     {	
 	int size = 0;
@@ -45,22 +40,12 @@ public class DoublyLinkedAllit {
     
     public void printList ()
     {
-	System.out.println ("List:");
 	ListItem listPtr = front;
 	while (listPtr != null) {
 	    System.out.print (" " + listPtr.data);
 	    listPtr = listPtr.next;
 	}
 	System.out.println ();
-    }
-    
-    static DoublyLinkedAllit deepCopyList ()
-    {
-	DoublyLinkedAllit target = new DoublyLinkedAllit ();
-	for (String s: source) {
-	    target.addToList (s);
-	}
-	return target;
     }
 
 }
