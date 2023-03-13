@@ -27,6 +27,7 @@ public class DoublyLinkedAllit {
 	}
     }
 
+    
     public int size ()
     {	
 	int size = 0;
@@ -37,6 +38,7 @@ public class DoublyLinkedAllit {
 	}
 	return size;
     }
+
     
     public void printList ()
     {
