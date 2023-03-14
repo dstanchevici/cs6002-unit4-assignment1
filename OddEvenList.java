@@ -15,21 +15,23 @@ public class OddEvenList {
 
     public static void main (String[] argv)
     {
+	//System.out.println ("front w/o initialization=" + front); // Works fine.
+	
 	int[] A = {10, 12, 3, 5, 8, 6, 11, 9};
 	//int[] A = makeRandomArray (10);
 
 	// Debugging
-	System.out.print ("Array: ");
-	System.out.println (Arrays.toString(A));
+	//System.out.print ("Array: ");
+	//System.out.println (Arrays.toString(A));
 	
 	addToListSorted (A);
 	printList ();
 
-	//makeOddLinks ();
-	//makeEvenLinks ();
+	makeOddLinks ();
+	makeEvenLinks ();
 
-	//print ("Odd numbers", firstOdd);
-	//print ("Even numbers", firstEven);
+	print ("Odd numbers", firstOdd);
+	print ("Even numbers", firstEven);
 
     }
 
@@ -103,20 +105,66 @@ public class OddEvenList {
 	return A;
     }
 
-    /*
+    
     static void makeOddLinks ()
     {
-	// WRITE YOUR CODE HERE to link all the odd numbers
+        DualListItem ptr, lastOdd;
+	//System.out.println ("ptr w/o initialization=" + ptr); // Error
+	/*
+	  OddEvenList.java:42: error: variable ptr might not have been initialized
+	  System.out.println ("ptr w/o initialization=" + ptr);
+	                                                ^
+	 */
+	
+	ptr = lastOdd = front;
+	while (ptr != null) {
+	    // Find firstOdd
+	    if ( (firstOdd == null) && (ptr.data % 2 != 0) ) {
+		firstOdd = ptr;
+		lastOdd = firstOdd;
+	    } 
+
+	    // Find others, linking and keep track of the last one
+	    else if (ptr.data % 2 != 0) {
+		lastOdd.nextSameKind = ptr;
+		lastOdd = ptr;
+	    }
+	    
+	    ptr = ptr.next;
+	}
+
+	//System.out.println ("firstOdd=" + firstOdd.data);
+	//System.out.println ("lastOdd=" + lastOdd.data);
 
     }
+
 
     static void makeEvenLinks ()
     {
-	// WRITE YOUR CODE HERE to link all the even numbers
+        DualListItem ptr, lastEven;
+	
+	ptr = lastEven = front;
+	while (ptr != null) {
+	    // Find firstEve
+	    if ( (firstEven == null) && (ptr.data % 2 == 0) ) {
+		firstEven = ptr;
+		lastEven = firstEven;
+	    } 
+
+	    // Find others, linking and keep track of the last one
+	    else if (ptr.data % 2 == 0) {
+		lastEven.nextSameKind = ptr;
+		lastEven = ptr;
+	    }
+	    
+	    ptr = ptr.next;
+	}
+
+	//System.out.println ("firstEven=" + firstEven.data);
+	//System.out.println ("lastEven=" + lastEven.data);
+
 
     }
-
-
 
 
     static void print (String message, DualListItem first)
@@ -129,6 +177,6 @@ public class OddEvenList {
 	}
 	System.out.println ();
     }
-    */
+    
 
 }
