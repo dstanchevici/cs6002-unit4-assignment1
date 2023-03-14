@@ -10,7 +10,8 @@ class DualListItem {
 
 public class OddEvenList {
 
-    static DualListItem front, rear; // By default, these are initialized to null.
+    static DualListItem front = null;
+    static DualListItem rear = null;// By default, these are initialized to null.
     static DualListItem firstOdd, firstEven;
 
     public static void main (String[] argv)
@@ -117,6 +118,9 @@ public class OddEvenList {
 	 */
 	
 	ptr = lastOdd = front;
+	//System.out.println ("ptr=" + ptr); // DualListItem@58644d46
+	//System.out.println ("lastOdd=" + lastOdd); // DualListItem@58644d46
+	//System.out.println ("front=" + front); // DualListItem@58644d46
 	while (ptr != null) {
 	    // Find firstOdd
 	    if ( (firstOdd == null) && (ptr.data % 2 != 0) ) {
