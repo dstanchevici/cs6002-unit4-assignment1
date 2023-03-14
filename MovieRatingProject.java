@@ -30,11 +30,11 @@ public class MovieRatingProject {
 	
 	// 2b. Example of getting people who've watched a certain movie.
 	System.out.println ("People who've seen Terminator: " + getPeople("Terminator"));
-
-	/*
-	// 3a. Which is the most watched movie?
+	
+	//3a. Which is the most watched movie?
 	System.out.println ("Most watched movie: " + mostWatched());
 
+	
 	// 3b. Which is the least?
 	System.out.println ("Least watched movie: " + leastWatched());
 
@@ -43,7 +43,7 @@ public class MovieRatingProject {
 
 	// 4b. Which movie has the lowest average rating?
 	System.out.println ("Movie with lowest average rating: " + lowestRated());
-
+	/*
 	// 5a. Find the two people with the most movies in common.
 	mostInCommon ();
 
@@ -83,32 +83,118 @@ public class MovieRatingProject {
 	return moviePeople;
     }
 
-    /*
+    
     static String mostWatched ()
     {
-	// WRITE YOUR CODE HERE
+	String mostWatched = "";
+	int greatestFrequency = 0;
+	
+	for (String m: movies) {
+	    
+	    int mFrequency = 0;
+	    for (MovieRating r: allRatings) {
+		if ( r.movie.equals(m) ) {
+		    mFrequency++;
+		} 
+	    }
+	    
+	    if (mFrequency > greatestFrequency) {
+		greatestFrequency = mFrequency;
+		mostWatched = m;
+	    }
 
+	    //System.out.println (m + " has been watched " + mFrequency + " times.");
+	}
+	
+	return mostWatched;
     }
 
-
+    
     static String leastWatched ()
     {
-	// WRITE YOUR CODE HERE
+	String leastWatched = "";
+	int lowestFrequency = people.size();
+	
+	for (String m: movies) {
+	    
+	    int mFrequency = 0;
+	    for (MovieRating r: allRatings) {
+		if ( r.movie.equals(m) ) {
+		    mFrequency++;
+		} 
+	    }
+	    
+	    if (mFrequency < lowestFrequency) {
+		lowestFrequency = mFrequency;
+		leastWatched = m;
+	    }
+
+	    //System.out.println (m + " has been watched " + mFrequency + " times.");
+	}
+	
+	return leastWatched; 
 
     }
 
+    
     static String highestRated ()
     {
-	// WRITE YOUR CODE HERE
+	String highestRated = "";
+	double highestAverage = 0.0;
+	
+	for (String m: movies) {
+	    
+	    double mRatingSum = 0.0;
+	    int numOfRatings = 0;
+	    for (MovieRating r: allRatings) {
+		if ( r.movie.equals(m) ) {
+		    mRatingSum += r.rating;
+		    numOfRatings++;
+		} 
+	    }
+	    double mAverage = mRatingSum / numOfRatings;
+	    
+	    if (mAverage > highestAverage) {
+		highestAverage = mAverage;
+		highestRated = m;
+	    }
 
+	    //System.out.println (m + " has average rating of  " + mAverage + ".");
+	}
+	
+	return highestRated;
     }
 
+    
     static String lowestRated ()
     {
-	// WRITE YOUR CODE HERE
+	String lowestRated = "";
+	double lowestAverage = 5.0; // Assuming this is the highest possible rating
+	
+	for (String m: movies) {
+	    
+	    double mRatingSum = 0.0;
+	    int numOfRatings = 0;
+	    for (MovieRating r: allRatings) {
+		if ( r.movie.equals(m) ) {
+		    mRatingSum += r.rating;
+		    numOfRatings++;
+		} 
+	    }
+	    double mAverage = mRatingSum / numOfRatings;
+	    
+	    if (mAverage < lowestAverage) {
+		lowestAverage = mAverage;
+		lowestRated = m;
+	    }
 
+	    //System.out.println (m + " has average rating of  " + mAverage + ".");
+	}
+	
+	return lowestRated;
     }
 
+    /*
     static void mostInCommon ()
     {
 	// WRITE YOUR CODE HERE
