@@ -13,48 +13,47 @@ public class MovieRatingProject {
 
     public static void main (String[] argv)
     {
+	System.out.println ("*********************************");
 	
 	allRatings = MovieRatings.getRatings ();
 	MovieRating r = allRatings.get (2);
 	System.out.println ("Example: " + r.name + " has rating " + r.rating + " for " + r.movie);
+	System.out.println ();
 
 	// 1. Walk through the list of ratings and extract unique
 	// person names, and unique movie titles.
 	extractMoviesAndPeople ();
 	System.out.println ("All people: " + people);
 	System.out.println ("All movies: " + movies);
+	System.out.println ();	
 	
 	// 2a. Example of getting movies watched by an individual.
-	System.out.println ("Movies watched by Ella: " + getMovies("Ella"));
-
-	
+	System.out.println ("Movies watched by Ella: " + getMovies("Ella"));	
 	// 2b. Example of getting people who've watched a certain movie.
 	System.out.println ("People who've seen Terminator: " + getPeople("Terminator"));
 	
+	System.out.println ();	
+	
 	//3a. Which is the most watched movie?
 	System.out.println ("Most watched movie: " + mostWatched());
-
-	
 	// 3b. Which is the least?
 	System.out.println ("Least watched movie: " + leastWatched());
+	
+	System.out.println ();	
 
 	// 4a. Which movie has the highest average rating?
 	System.out.println ("Movie with highest average rating: " + highestRated());
-
 	// 4b. Which movie has the lowest average rating?
 	System.out.println ("Movie with lowest average rating: " + lowestRated());
 	
+	System.out.println ();	
+	
 	// 5a. Find the two people with the most movies in common.
 	mostInCommon ();
-
-	/*
 	// 5b. Find the two with the fewest movies in common.
-	leastInCommon ();
-	*/
+	leastInCommon ();	
 
-	//for (MovieRating x: allRatings) {
-	//System.out.println (x);
-	//}
+	System.out.println ("*********************************");
     }
 
     static void extractMoviesAndPeople ()
@@ -209,7 +208,7 @@ public class MovieRatingProject {
 
 	for (String p: people) {
 	    LinkedList<String> pMovies = getMovies (p);
-	    System.out.println ("\n---- p=" + p + " -----"); // Debug
+	    //System.out.println ("\n---- p=" + p + " -----"); // Debug
 	    for (String q: people) {
 		if ( !p.equals(q) ) {
 		    LinkedList<String> qMovies = getMovies (q);
@@ -222,13 +221,13 @@ public class MovieRatingProject {
 			maxInCommon = currentIntersection.size();
 		    }
 		    //Debug
-		    System.out.println ("With " + q + ": " + currentIntersection );
-		    System.out.println ("largestIntersection. person1=" + personWithMostInCommon_1 + " person2=" + personWithMostInCommon_2 + "num of shared=" +  maxInCommon + ": " + largestIntersection);
-		}
-		
+		    //System.out.println ("With " + q + " num=" + currentIntersection.size()  + ": " + currentIntersection );
+		    //System.out.println ("largestIntersection. person1=" + personWithMostInCommon_1 + " person2=" + personWithMostInCommon_2 + " num=" +  maxInCommon + ": " + largestIntersection);
+		}		
 	    } // end-for-q
 	} // end-for-p
 
+	System.out.println ("Most movies are shared in common by " + personWithMostInCommon_1 + " and " + personWithMostInCommon_2 + ". These " + maxInCommon + " movies are: " + largestIntersection);
     } // end-mostInCommon()
 
     
