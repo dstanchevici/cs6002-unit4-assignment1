@@ -227,13 +227,39 @@ public class MovieRatingProject {
 	    } // end-for-q
 	} // end-for-p
 
-	System.out.println ("Most movies are shared in common by " + personWithMostInCommon_1 + " and " + personWithMostInCommon_2 + ". These " + maxInCommon + " movies are: " + largestIntersection);
+	System.out.println ("Most movies are shared in common by " + personWithMostInCommon_1 + " and " + personWithMostInCommon_2 + ". They share " + maxInCommon + " movies: " + largestIntersection);
     } // end-mostInCommon()
 
     
     static void leastInCommon ()
     {
-	// WRITE YOUR CODE HERE
+	String personWithLeastInCommon_1 = "";
+	String personWithLeastInCommon_2 = "";
+	int minInCommon = movies.size(); // The largest possible number of movies.
+	LinkedList<String> smallestIntersection = null;
+
+	for (String p: people) {
+	    LinkedList<String> pMovies = getMovies (p);
+	    //System.out.println ("\n---- p=" + p + " -----"); // Debug
+	    for (String q: people) {
+		if ( !p.equals(q) ) {
+		    LinkedList<String> qMovies = getMovies (q);
+		    LinkedList<String> currentIntersection = computeIntersection (pMovies, qMovies);
+
+		    if (currentIntersection.size() < minInCommon) {
+			personWithLeastInCommon_1 = p;
+			personWithLeastInCommon_2 = q;
+			smallestIntersection = currentIntersection;
+			minInCommon = currentIntersection.size();
+		    }
+		    //Debug
+		    //System.out.println ("With " + q + " num=" + currentIntersection.size()  + ": " + currentIntersection );
+		    //System.out.println ("largestIntersection. person1=" + personWithMostInCommon_1 + " person2=" + personWithMostInCommon_2 + " num=" +  maxInCommon + ": " + largestIntersection);
+		}		
+	    } // end-for-q
+	} // end-for-p
+
+	System.out.println ("The fewest movies are shared in common by " + personWithLeastInCommon_1 + " and " + personWithLeastInCommon_2 + ". They share " + minInCommon + " movies: " + smallestIntersection);
 
     }
 
