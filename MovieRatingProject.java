@@ -43,13 +43,18 @@ public class MovieRatingProject {
 
 	// 4b. Which movie has the lowest average rating?
 	System.out.println ("Movie with lowest average rating: " + lowestRated());
-	/*
+	
 	// 5a. Find the two people with the most movies in common.
 	mostInCommon ();
 
+	/*
 	// 5b. Find the two with the fewest movies in common.
 	leastInCommon ();
 	*/
+
+	//for (MovieRating x: allRatings) {
+	//System.out.println (x);
+	//}
     }
 
     static void extractMoviesAndPeople ()
@@ -169,7 +174,7 @@ public class MovieRatingProject {
     static String lowestRated ()
     {
 	String lowestRated = "";
-	double lowestAverage = 5.0; // Assuming this is the highest possible rating
+	double lowestAverage = 10000.0; // Assuming this is the highest possible rating
 	
 	for (String m: movies) {
 	    
@@ -194,19 +199,58 @@ public class MovieRatingProject {
 	return lowestRated;
     }
 
-    /*
+    
     static void mostInCommon ()
     {
-	// WRITE YOUR CODE HERE
+	String personWithMostInCommon_1 = "";
+	String personWithMostInCommon_2 = "";
+	int maxInCommon = 0;
+	LinkedList<String> largestIntersection = null;
 
-    }
+	for (String p: people) {
+	    LinkedList<String> pMovies = getMovies (p);
+	    System.out.println ("\n---- p=" + p + " -----"); // Debug
+	    for (String q: people) {
+		if ( !p.equals(q) ) {
+		    LinkedList<String> qMovies = getMovies (q);
+		    LinkedList<String> currentIntersection = computeIntersection (pMovies, qMovies);
 
+		    if (currentIntersection.size() > maxInCommon) {
+			personWithMostInCommon_1 = p;
+			personWithMostInCommon_2 = q;
+			largestIntersection = currentIntersection;
+			maxInCommon = currentIntersection.size();
+		    }
+		    //Debug
+		    System.out.println ("With " + q + ": " + currentIntersection );
+		    System.out.println ("largestIntersection. person1=" + personWithMostInCommon_1 + " person2=" + personWithMostInCommon_2 + "num of shared=" +  maxInCommon + ": " + largestIntersection);
+		}
+		
+	    } // end-for-q
+	} // end-for-p
 
+    } // end-mostInCommon()
+
+    
     static void leastInCommon ()
     {
 	// WRITE YOUR CODE HERE
 
     }
-    */
+
+    
+    static LinkedList<String> computeIntersection (LinkedList<String> listA, LinkedList<String> listB)
+    {
+	LinkedList<String> intersection = new LinkedList<> ();
+
+	for (String s: listA) {
+	    if ( listB.contains(s) ) {
+		intersection.add (s);
+	    }
+	}
+
+	return intersection;
+    }
+   
 
 }
