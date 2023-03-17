@@ -11,12 +11,11 @@ class DualListItem {
 public class OddEvenList {
 
     static DualListItem front = null;
-    static DualListItem rear = null;// By default, these are initialized to null.
-    static DualListItem firstOdd, firstEven;
+    static DualListItem rear = null;// Good practice, but by default, these global variables are initialized to null.
+    static DualListItem firstOdd, firstEven; // These are initialized to null.
 
     public static void main (String[] argv)
     {
-	//System.out.println ("front w/o initialization=" + front); // Works fine.
 	
 	int[] A = {10, 12, 3, 5, 8, 6, 11, 9};
 	//int[] A = makeRandomArray (10);
@@ -59,14 +58,17 @@ public class OddEvenList {
 	    DualListItem insertedItem = new DualListItem ();
 	    insertedItem.data = A[i];
 
+	    // Insert in front
 	    if (afterInserted == front) {
 		insertedItem.next = front;
 		front = insertedItem;
 	    }
+	    // Insert at rear
 	    else if (afterInserted == null) {
 		rear.next = insertedItem;
 		rear = insertedItem;
 	    }
+	    // Insert in middle
 	    else {
 		beforeInserted.next = insertedItem;
 		insertedItem.next = afterInserted;
@@ -128,7 +130,7 @@ public class OddEvenList {
 		lastOdd = firstOdd;
 	    } 
 
-	    // Find others, linking and keep track of the last one
+	    // Find others, linking and keeping track of the last one
 	    else if (ptr.data % 2 != 0) {
 		lastOdd.nextSameKind = ptr;
 		lastOdd = ptr;
